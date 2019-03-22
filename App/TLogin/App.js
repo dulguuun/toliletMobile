@@ -4,6 +4,15 @@ import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import RootContainer from './RootContainer'
 import createStore from '../Redux'
+import { createStackNavigator, createAppContainer } from 'react-navigation'
+import Launch from './LaunchScreen'
+import Auth from './LoginScreen/Auth'
+
+const MainNavigator = createStackNavigator({
+    Home: {screen: Launch}
+});
+
+// const App = createAppContainer(MainNavigator);
 
 // create our store
 const store = createStore()
