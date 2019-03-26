@@ -8,11 +8,9 @@ import { createStackNavigator, createAppContainer } from 'react-navigation'
 import Launch from './LaunchScreen'
 import Auth from './LoginScreen/Auth'
 
-const MainNavigator = createStackNavigator({
-    Home: {screen: Launch}
-});
-
-// const App = createAppContainer(MainNavigator);
+// const MainNavigator = createStackNavigator({
+//     Home: {screen: Launch}
+// });
 
 // create our store
 const store = createStore()
