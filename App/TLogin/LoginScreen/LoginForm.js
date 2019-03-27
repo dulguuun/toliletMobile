@@ -9,6 +9,7 @@ import {
     TouchableHighlight, 
     StyleSheet,
     Alert,
+    AsyncStorage
   } from 'react-native'
 import { Images } from '../../Themes'
 import axios from 'axios'
@@ -21,25 +22,44 @@ class LoginForm extends Component {
     this.state = {
       email   : '',
       password: '',
-      loading: false,
+      isLoggedIn: false,
+      userData: {}
     }
   }
 
   _onLoginFunction = () => {
-    let respPass;
     var form = new FormData();
     form.append("email", this.state.email);
     form.append("password", this.state.password);
 
-    axios.post('http://172.18.69.33:8000/api/user/login',form)
-      .then(function(response){
-          respPass = response.data.success
-          this.setState({loading:true})
-          console.log(respPass + " butsah utga");
-      }).catch(function(error){
+    // this.componentDidMount = () => {
+      axios.post('http://172.18.69.33:8000/api/user/login',form)
+      .then(response => {
+          if(response.data.success){
+            let userData = [{
+              name: response.data.data.name,
+              id: response.data.data.id,
+              email: response.data.data.email,
+              auth_token: response.data.data.auth_token,
+              timestamp: new Date().toString()
+            }];
+            let appState = {
+              isLoggedIn: true,
+              userData: userData
+            };
+            AsyncStorage.setItem('userData', JSON.stringify(userData))
+            // localStorage["appState"] = JSON.stringify(appState);
+            this.setState({
+              isLoggedIn: appState.isLoggedIn,
+              user: appState.user
+            });
+          }
+      }).catch(error => {
           console.log(error);
       });
-    if(this.state.loading){
+    // }
+
+    if(this.state.isLoggedIn){
       this.props.navigation.navigate('Dashboard')
     }else {
       Alert.alert("Алдаа", "Хэрэглэгчийн мэйл/нууц үг буруу байна!");

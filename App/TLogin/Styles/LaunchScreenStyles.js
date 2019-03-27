@@ -20,8 +20,14 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   buttonGroup: {
-    flex: 1, backgroundColor: 'white',
-    paddingVertical: 10
+    backgroundColor: 'white',
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height:60,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   sectionText: {
     fontSize: 50,

@@ -69,7 +69,14 @@ export default createStackNavigator(
         header: null,
       }),
     },
-    Dashboard: Dashboard,
+    Dashboard: {
+      screen: Dashboard,
+      navigationOptions: {
+        title: 'Customer Name, profiles edit, logout',
+        headerLeft: null,
+        gesturesEnabled: false,
+      },
+    },
     Login: {
       screen: Login
     },
