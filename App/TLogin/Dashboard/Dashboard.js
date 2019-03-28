@@ -11,73 +11,73 @@ import {
 
 class Dashboard extends Component {
 
-    constructor(props){
-        super(props);
-        this.state = {
-            name: '',
-            email: '',
-            timestamp: ''
-        }
-    }
-    
-    componentDidMount = () =>{
-        AsyncStorage.getItem('userData', (err, result) => {
-            console.log('Storage Details ' + JSON.parse(result)[0]);
-            console.log('Fuckers ' + result);
-            console.log('Full of shit ' + result.name);
-            // this.setState({ name: JSON.parse(result.name)[0] });
-        });
-    }
-
-    render () {
-      return (
-        <View style={Loginstyles.container}>
-            <View>
-                <Text style={Loginstyles.headerText}>Үндсэн цэс</Text>
-            </View>
-
-            <View style={Loginstyles.inputContainer1}>
-                <TouchableHighlight style={[Loginstyles.facebook, Loginstyles.loginButton]} 
-                    onPress={() => this.onClickListener('facebook_login')}>
-                    <Text style={Loginstyles.loginText}>Загвар шалгах</Text>
-                </TouchableHighlight>
-
-                <TouchableHighlight style={[Loginstyles.facebook, Loginstyles.loginButton]} 
-                    onPress={() => this.onClickListener('login')}>
-                    {/* <Image style={Loginstyles.fingerIcon} source={Images.fingerPrint}/> */}
-                    <Text style={Loginstyles.loginText}>Хэлцэл</Text>
-                </TouchableHighlight>
-            </View>
-
-            <View style={Loginstyles.inputContainer1}>
-                <TouchableHighlight style={[Loginstyles.facebook, Loginstyles.loginButton]} 
-                    onPress={() => this.onClickListener('facebook_login')}>
-                    <Text style={Loginstyles.loginText}>Хяналтын самбар</Text>
-                </TouchableHighlight>
-
-                <TouchableHighlight style={[Loginstyles.facebook, Loginstyles.loginButton]} 
-                    onPress={() => this.onClickListener('login')}>
-                    {/* <Image style={Loginstyles.fingerIcon} source={Images.fingerPrint}/> */}
-                    <Text style={Loginstyles.loginText}>Мэдээллийн самбар</Text>
-                </TouchableHighlight>
-            </View>
-
-            <View style={Loginstyles.inputContainer1}>
-                <TouchableHighlight style={[Loginstyles.facebook, Loginstyles.loginButton]} 
-                    onPress={() => this.onClickListener('facebook_login')}>
-                    <Text style={Loginstyles.loginText}>Сэтгэгдэл</Text>
-                </TouchableHighlight>
-
-                <TouchableHighlight style={[Loginstyles.facebook, Loginstyles.loginButton]} 
-                    onPress={() => this.onClickListener('login')}>
-                    {/* <Image style={Loginstyles.fingerIcon} source={Images.fingerPrint}/> */}
-                    <Text style={Loginstyles.loginText}>Тусламж</Text>
-                </TouchableHighlight>
-            </View>
-        </View>
-      );
+  constructor(props){
+    super(props);
+    this.state = {
+        name: '',
+        email: '',
+        timestamp: ''
     }
   }
+    
+  componentDidMount = () =>{
+    AsyncStorage.getItem('userData', (err, result) => {
+      console.log('Storage Details ' + JSON.parse(result)[0]);
+      console.log('Fuckers ' + result);
+      console.log('Full of shit ' + result.name);
+      // this.setState({ name: JSON.parse(result.name)[0] });
+    });
+  }
+
+  render () {
+    return (
+      <View style={Loginstyles.container}>
+        <View>
+          <Text style={Loginstyles.headerText}>Үндсэн цэс</Text>
+        </View>
+
+        <View style={Loginstyles.inputContainer1}>
+          <TouchableHighlight style={[Loginstyles.facebook, Loginstyles.loginButton]} 
+            onPress={() => this.props.navigation.navigate('FaCheck')}>
+            <Text style={Loginstyles.loginText}>Загвар шалгах</Text>
+          </TouchableHighlight>
+
+          <TouchableHighlight style={[Loginstyles.facebook, Loginstyles.loginButton]} 
+            onPress={() => this.props.navigation.navigate('FaCheck')}>
+            {/* <Image style={Loginstyles.fingerIcon} source={Images.fingerPrint}/> */}
+            <Text style={Loginstyles.loginText}>Хэлцэл</Text>
+          </TouchableHighlight>
+        </View>
+
+        <View style={Loginstyles.inputContainer1}>
+          <TouchableHighlight style={[Loginstyles.facebook, Loginstyles.loginButton]} 
+            onPress={() => this.props.navigation.navigate('FaCheck')}>
+            <Text style={Loginstyles.loginText}>Хяналтын самбар</Text>
+          </TouchableHighlight>
+
+          <TouchableHighlight style={[Loginstyles.facebook, Loginstyles.loginButton]} 
+            onPress={() => this.props.navigation.navigate('FaCheck')}>
+            {/* <Image style={Loginstyles.fingerIcon} source={Images.fingerPrint}/> */}
+            <Text style={Loginstyles.loginText}>Мэдээллийн самбар</Text>
+          </TouchableHighlight>
+        </View>
+
+        <View style={Loginstyles.inputContainer1}>
+          <TouchableHighlight style={[Loginstyles.facebook, Loginstyles.loginButton]} 
+            onPress={() => this.props.navigation.navigate('FaCheck')}>
+            <Text style={Loginstyles.loginText}>Сэтгэгдэл</Text>
+          </TouchableHighlight>
+
+          <TouchableHighlight style={[Loginstyles.facebook, Loginstyles.loginButton]} 
+            onPress={() => this.props.navigation.navigate('FaCheck')}>
+            {/* <Image style={Loginstyles.fingerIcon} source={Images.fingerPrint}/> */}
+            <Text style={Loginstyles.loginText}>Тусламж</Text>
+          </TouchableHighlight>
+        </View>
+      </View>
+    );
+  }
+}
 
   const Loginstyles = StyleSheet.create({
     container: {

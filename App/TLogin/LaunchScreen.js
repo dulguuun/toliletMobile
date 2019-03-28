@@ -10,6 +10,7 @@ import {
 import Login from './LoginScreen/LoginForm'
 import Register from './LoginScreen/Register'
 import Dashboard from './Dashboard/Dashboard'
+import FaCheck from './Dashboard/FaCheck'
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { Images } from '../Themes'
 
@@ -47,7 +48,7 @@ class LaunchScreen extends Component {
           </View>
 
           <View style={styles.buttonGroup} >
-            <Button title="Нэвтрэх" onPress={ () => this.props.navigation.navigate('Login') } />
+            <Button title="Нэвтрэх" onPress={ () => this.props.navigation.navigate('Dashboard') } />
             <Button title="Бүртгүүлэх" onPress={ () => this.props.navigation.navigate('Register') } />
           </View>
           
@@ -76,6 +77,9 @@ export default createStackNavigator(
         headerLeft: null,
         gesturesEnabled: false,
       },
+    },
+    FaCheck: {
+      screen: FaCheck,
     },
     Login: {
       screen: Login

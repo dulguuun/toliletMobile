@@ -34,7 +34,7 @@ class Register extends Component {
           form.append("password", this.state.password);
           form.append("password_confirmation", this.state.password_confirmation);
   
-      axios.post('http://172.18.69.33:8000/api/user/register',form)
+      axios.post('http://192.168.88.87:8000/api/user/register',form)
           .then(function(response){
               console.log(response.data);
               var respEmail = response.data.data.email;
