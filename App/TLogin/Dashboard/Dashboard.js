@@ -79,50 +79,50 @@ class Dashboard extends Component {
   }
 }
 
-  const Loginstyles = StyleSheet.create({
-    container: {
-      flex: 1,
-    //   justifyContent: 'center',
-    //   alignItems: 'center',
-      backgroundColor: '#DCDCDC',
-    },
-    headerText:{
-        fontSize:30,
-        color:'black',
-        alignItems:'center',
-        padding:20,
-        backgroundColor: 'gray',
-        marginBottom:10
-    },
-    inputContainer1: {
-        flexDirection: 'row',
-        flex: 1,
-    },
-    facebook: {
-      height:120,
+const Loginstyles = StyleSheet.create({
+  container: {
+    flex: 1,
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+    backgroundColor: '#DCDCDC',
+  },
+  headerText:{
+      fontSize:30,
+      color:'black',
+      alignItems:'center',
+      padding:20,
+      backgroundColor: 'gray',
+      marginBottom:10
+  },
+  inputContainer1: {
       flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginBottom:20,
-      width:150,
-      marginLeft:10,
-      marginRight:10,
-      flex:1
-    //   borderRadius:30,
-    },
-    fingerPrint: {
-      height:45,
-      marginBottom:20,
-      width:50,
-      borderRadius:30,
-      justifyContent: 'center',
-    },
-    loginButton: {
-      backgroundColor: "#00b5ec",
-    },
-    loginText: {
-      color: 'white',
-    }
-  });
+      flex: 1,
+  },
+  facebook: {
+    height:120,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom:20,
+    width:150,
+    marginLeft:10,
+    marginRight:10,
+    flex:1
+  //   borderRadius:30,
+  },
+  fingerPrint: {
+    height:45,
+    marginBottom:20,
+    width:50,
+    borderRadius:30,
+    justifyContent: 'center',
+  },
+  loginButton: {
+    backgroundColor: "#00b5ec",
+  },
+  loginText: {
+    color: 'white',
+  }
+});
 
 export default Dashboard
