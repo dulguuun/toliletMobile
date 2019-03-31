@@ -11,6 +11,7 @@ import Login from './LoginScreen/LoginForm'
 import Register from './LoginScreen/Register'
 import Dashboard from './Dashboard/Dashboard'
 import FaCheck from './Dashboard/FaCheck'
+import DetialFaCheck from './Dashboard/DetialFaCheck'
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { Images } from '../Themes'
 
@@ -80,6 +81,9 @@ export default createStackNavigator(
     },
     FaCheck: {
       screen: FaCheck,
+    },
+    DetialFaCheck: {
+      screen: DetialFaCheck,
     },
     Login: {
       screen: Login

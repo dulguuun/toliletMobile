@@ -31,29 +31,29 @@ class LoginForm extends Component {
     var form = new FormData();
     form.append("email", this.state.email);
     form.append("password", this.state.password);
-
+  
     // this.componentDidMount = () => {
       axios.post('http://192.168.88.87:8000/api/user/login',form)
       .then(response => {
-          if(response.data.success){
-            let userData = [{
-              name: response.data.data.name,
-              id: response.data.data.id,
-              email: response.data.data.email,
-              auth_token: response.data.data.auth_token,
-              timestamp: new Date().toString()
-            }];
-            let appState = {
-              isLoggedIn: true,
-              userData: userData
-            };
-            AsyncStorage.setItem('userData', JSON.stringify(userData))
-            // localStorage["appState"] = JSON.stringify(appState);
-            this.setState({
-              isLoggedIn: appState.isLoggedIn,
-              user: appState.user
-            });
-          }
+        if(response.data.success){
+          let userData = [{
+            name: response.data.data.name,
+            id: response.data.data.id,
+            email: response.data.data.email,
+            auth_token: response.data.data.auth_token,
+            timestamp: new Date().toString()
+          }];
+          let appState = {
+            isLoggedIn: true,
+            userData: userData
+          };
+          AsyncStorage.setItem('userData', JSON.stringify(userData))
+          // localStorage["appState"] = JSON.stringify(appState);
+          this.setState({
+            isLoggedIn: appState.isLoggedIn,
+            user: appState.user
+          });
+        }
       }).catch(error => {
           console.log(error);
       });

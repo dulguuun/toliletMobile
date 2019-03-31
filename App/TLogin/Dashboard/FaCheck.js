@@ -7,18 +7,21 @@ import {
   View, 
   Button, 
   TextInput,
-  TouchableHighlight, 
+  TouchableOpacity, 
   StyleSheet,
   Alert,
-  AsyncStorage
+  AsyncStorage,
+  FlatList
 } from 'react-native'
 import axios from 'axios'
+import { SearchBar } from 'react-native-elements'
 
 class FaCheck extends Component{
 
   constructor(props){
     super(props);
     this.state = {
+      search: '',
       products: []
     }
   }
@@ -31,7 +34,7 @@ class FaCheck extends Component{
       // this.setState({ name: JSON.parse(result.name)[0] });
     });
 
-    let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTkyLjE2OC44OC44Nzo4MDAwL2FwaS91c2VyL2xvZ2luIiwiaWF0IjoxNTUzNzYyNDM5LCJleHAiOjE1NTM3NjYwMzksIm5iZiI6MTU1Mzc2MjQzOSwianRpIjoibDB1R3dNMTFQOXZJVXFMdiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.ySHZBPVEYOtHXqFXLHXyBaKhOOUhk_jN3OWlTLhvqUU';
+    let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTkyLjE2OC44OC44Nzo4MDAwL2FwaS91c2VyL2xvZ2luIiwiaWF0IjoxNTUzODU4OTI5LCJleHAiOjE1NTM4NjI1MjksIm5iZiI6MTU1Mzg1ODkyOSwianRpIjoiM1VZWG84dmNoVUNsR0t6YSIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.k5QymPRqTpTa8X30Pw5-HktT54e-301CU2vmkIVWieM';
     let url = 'http://192.168.88.87:8000/api/products?token='+token+'';
         console.log('url '+ url);
     axios.get('http://192.168.88.87:8000/api/products?token='+token+'')
@@ -47,32 +50,41 @@ class FaCheck extends Component{
       });
   }
 
-  lapsList() {
-    this.state.products.map((data) => {
-      return (
-        <View><Text>{data.time}</Text></View>
-      )
-    })
+  updateSearch = search => {
+    this.setState({ search });
+  }
+
+  renderItem(item) {
+    return(
+      <TouchableOpacity
+          onPress={ () => this.props.navigation.navigate('DetialFaCheck') }
+          style={{flex:1/3,
+          aspectRatio:1}}>
+      <Text>{item.name}</Text>
+      <Image style={{flex: 1}} resizeMode='cover' source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}} ></Image>
+      </TouchableOpacity>
+    );
   }
 
   render() {
-
-  //   contents = this.state.products.map(function (item) {
-  //     return (
-  //       <View key={item}>
-  //         <Text>{item}</Text>
-  //       </View>
-  //     );
-  //  });
-
     return(
       <View style={Loginstyles.container}>
         <View>
-          <Text style={Loginstyles.headerText}>Бүтээгдэхүүнүүд</Text>
+          <Text style={Loginstyles.headerText}>Таны байршилд тохирох загвар</Text>
         </View>
-        {/* <View>
-          { contents }
-        </View> */}
+        <View>
+          <SearchBar 
+            placeholder="Хайх үгээ оруул"
+            onChangeText={this.updateSearch}
+            value={this.state.search}
+          />
+        </View>
+        <FlatList
+          numColumns={3}
+          data={this.state.products}
+          renderItem={({item}) =>this.renderItem(item)}
+          // keyExtractor={(item, index) => index}
+        />
       </View>
     );
   }
@@ -86,16 +98,17 @@ const Loginstyles = StyleSheet.create({
     backgroundColor: '#DCDCDC',
   },
   headerText:{
-      fontSize:30,
-      color:'black',
-      alignItems:'center',
-      padding:20,
-      backgroundColor: 'gray',
-      marginBottom:10
+    fontSize:20,
+    color:'black',
+    alignItems:'center',
+    padding:20,
+    borderBottomWidth:1,
+    borderBottomColor: 'black',
+    marginBottom:10
   },
   inputContainer1: {
-      flexDirection: 'row',
-      flex: 1,
+    flexDirection: 'row',
+    flex: 1,
   },
   facebook: {
     height:120,
