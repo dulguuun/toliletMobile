@@ -11,8 +11,18 @@ import {
     Alert,
     AsyncStorage
   } from 'react-native'
+import Storage from 'react-native-storage';
 import { Images } from '../../Themes'
 import axios from 'axios'
+
+const storage = new Storage({
+  size: 1000,
+  defaultExpires: 1000 * 3600 * 24,
+  enableCache: true,
+  storageBackend: AsyncStorage,
+  sync: {
+  }
+});
 
 class LoginForm extends Component {
 
@@ -28,37 +38,40 @@ class LoginForm extends Component {
   }
 
   _onLoginFunction = () => {
-    var form = new FormData();
+	var form = new FormData();
     form.append("email", this.state.email);
     form.append("password", this.state.password);
-  
-    // this.componentDidMount = () => {
-      axios.post('http://192.168.88.87:8000/api/user/login',form)
+
+    axios.post('http://192.168.88.87:8000/api/user/login',form)
       .then(response => {
         if(response.data.success){
-          let userData = [{
+          let userData = {
             name: response.data.data.name,
             id: response.data.data.id,
             email: response.data.data.email,
             auth_token: response.data.data.auth_token,
             timestamp: new Date().toString()
-          }];
+          };
           let appState = {
             isLoggedIn: true,
             userData: userData
           };
-          AsyncStorage.setItem('userData', JSON.stringify(userData))
-          // localStorage["appState"] = JSON.stringify(appState);
+          storage.save({
+            key: 'userData',
+            data:userData,
+            expires: 1000*3600
+          });
+
           this.setState({
             isLoggedIn: appState.isLoggedIn,
             user: appState.user
           });
         }
+        console.log('isCheck ' + this.state.isLoggedIn)
       }).catch(error => {
           console.log(error);
       });
-    // }
-
+	  
     if(this.state.isLoggedIn){
       this.props.navigation.navigate('Dashboard')
     }else {

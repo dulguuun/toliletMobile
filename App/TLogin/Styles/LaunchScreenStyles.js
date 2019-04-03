@@ -20,14 +20,27 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   buttonGroup: {
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    height:60,
+    // flexDirection: 'row',
+    // justifyContent: 'space-between',
+    // height:60,
     width: '100%',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+  },
+  button: {
     alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#841584',
+    padding: 10,
+    margin: 10,
+    flex: 1,
+    borderRadius:10
+  },
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+    textAlign: 'center'
   },
   sectionText: {
     fontSize: 50,

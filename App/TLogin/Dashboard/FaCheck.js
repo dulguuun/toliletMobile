@@ -15,29 +15,49 @@ import {
 } from 'react-native'
 import axios from 'axios'
 import { SearchBar } from 'react-native-elements'
+import Storage from 'react-native-storage';
+const storage = new Storage({
+  size: 1000,
+  defaultExpires: 1000 * 3600 * 24,
+  enableCache: true,
+  storageBackend: AsyncStorage,
+  sync: {
+  }
+});
 
 class FaCheck extends Component{
 
   constructor(props){
     super(props);
     this.state = {
-      search: '',
+      name: '',
+      email: '',
+      timestamp: '',
+      auth_token: '',
       products: []
     }
   }
     
-  componentDidMount = () =>{
-    AsyncStorage.getItem('userData', (err, result) => {
-      console.log('Storage Details ' + JSON.parse(result)[0]);
-      console.log('Fuckers ' + result);
-      console.log('Full of shit ' + result.name);
-      // this.setState({ name: JSON.parse(result.name)[0] });
-    });
-
-    let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTkyLjE2OC44OC44Nzo4MDAwL2FwaS91c2VyL2xvZ2luIiwiaWF0IjoxNTUzODU4OTI5LCJleHAiOjE1NTM4NjI1MjksIm5iZiI6MTU1Mzg1ODkyOSwianRpIjoiM1VZWG84dmNoVUNsR0t6YSIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.k5QymPRqTpTa8X30Pw5-HktT54e-301CU2vmkIVWieM';
-    let url = 'http://192.168.88.87:8000/api/products?token='+token+'';
-        console.log('url '+ url);
-    axios.get('http://192.168.88.87:8000/api/products?token='+token+'')
+  componentWillMount = () =>{
+    storage.load({
+      key:'userData',
+      autoSync: true,
+      syncInBackground: true,
+      syncParams: {
+        someFlag: true
+      }
+    }).then(ret => {
+      this.setState({
+        name: ret.name,
+        email: ret.email,
+        timestamp: ret.timestamp,
+        auth_token: ret.auth_token
+      });
+      console.log('url2 '+ token);
+      console.log('token2 '+ this.state.auth_token);
+      let token = this.state.auth_token
+      //let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTAuNS4yMDEuMjQ6ODAwMC9hcGkvdXNlci9sb2dpbiIsImlhdCI6MTU1NDE2Mjc4MywiZXhwIjoxNTU0MTY2MzgzLCJuYmYiOjE1NTQxNjI3ODMsImp0aSI6InowOFZQTnY4NnpmdjN4S1ciLCJzdWIiOjEsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.SbmDKTUzYFBL3Ap2xV3Iiwkh2NKqnNAlgbVp4zS1xWk'
+      axios.get('http://192.168.88.87:8000/api/products?token='+token+'')
       .then(response => {
         console.log(response);
         let resJson = JSON.parse(JSON.stringify(response.data));
@@ -48,6 +68,15 @@ class FaCheck extends Component{
       }).catch(error => {
         console.log(error);
       });
+    }).catch(err => {
+      console.warn(err.message);
+      switch (err.name) {
+        case 'NotFoundError':
+          break;
+        case 'ExpiredError':
+          break;
+      }
+    });
   }
 
   updateSearch = search => {
@@ -57,21 +86,22 @@ class FaCheck extends Component{
   renderItem(item) {
     return(
       <TouchableOpacity
-          onPress={ () => this.props.navigation.navigate('DetialFaCheck') }
-          style={{flex:1/3,
-          aspectRatio:1}}>
-      <Text>{item.name}</Text>
-      <Image style={{flex: 1}} resizeMode='cover' source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}} ></Image>
+          onPress={ 
+            () => this.props.navigation.navigate('DetialFaCheck',{
+              name: item.name,
+              price: item.price,
+              definition: item.definition
+          }) }
+        style={{flex:1/3,aspectRatio:1}}>
+        <Text style={styles.ItemText}>{item.name}</Text>
+        <Image style={{flex: 1}} resizeMode='cover' source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}} ></Image>
       </TouchableOpacity>
     );
   }
 
   render() {
     return(
-      <View style={Loginstyles.container}>
-        <View>
-          <Text style={Loginstyles.headerText}>Таны байршилд тохирох загвар</Text>
-        </View>
+      <View style={styles.container}>
         <View>
           <SearchBar 
             placeholder="Хайх үгээ оруул"
@@ -90,7 +120,7 @@ class FaCheck extends Component{
   }
 }
 
-const Loginstyles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
   //   justifyContent: 'center',
@@ -106,34 +136,11 @@ const Loginstyles = StyleSheet.create({
     borderBottomColor: 'black',
     marginBottom:10
   },
-  inputContainer1: {
-    flexDirection: 'row',
-    flex: 1,
-  },
-  facebook: {
-    height:120,
-    flexDirection: 'row',
-    justifyContent: 'center',
+  ItemText: {
     alignItems: 'center',
-    marginBottom:20,
-    width:150,
-    marginLeft:10,
-    marginRight:10,
-    flex:1
-  //   borderRadius:30,
-  },
-  fingerPrint: {
-    height:45,
-    marginBottom:20,
-    width:50,
-    borderRadius:30,
     justifyContent: 'center',
-  },
-  loginButton: {
-    backgroundColor: "#00b5ec",
-  },
-  loginText: {
-    color: 'white',
+    color: 'black',
+    fontSize:20,
   }
 });
 

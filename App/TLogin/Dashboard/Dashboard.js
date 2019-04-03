@@ -6,34 +6,68 @@ import {
     View,
     AsyncStorage,
     TouchableHighlight,
-    StyleSheet
+    StyleSheet,
   } from 'react-native'
-
+import Storage from 'react-native-storage';
+const storage = new Storage({
+  size: 1000,
+  defaultExpires: 1000 * 3600 * 24,
+  enableCache: true,
+  storageBackend: AsyncStorage,
+  sync: {
+  }
+});
 class Dashboard extends Component {
 
   constructor(props){
     super(props);
     this.state = {
-        name: '',
-        email: '',
-        timestamp: ''
+      name: '',
+      email: '',
+      timestamp: '',
+      auth_token: '',
     }
   }
     
-  componentDidMount = () =>{
-    AsyncStorage.getItem('userData', (err, result) => {
-      console.log('Storage Details ' + JSON.parse(result)[0]);
-      console.log('Fuckers ' + result);
-      console.log('Full of shit ' + result.name);
-      // this.setState({ name: JSON.parse(result.name)[0] });
+  componentWillMount = () =>{
+    let token = '';
+    storage.load({
+      key:'userData',
+      autoSync: true,
+      syncInBackground: true,
+      syncParams: {
+        someFlag: true
+      }
+    }).then(ret => {
+      this.setState({
+        name: ret.name,
+        email: ret.email,
+        timestamp: ret.timestamp,
+        auth_token: ret.auth_token
+      });
+      console.log('url2 '+ token);
+      console.log('token2 '+ this.state.auth_token);
+    }).catch(err => {
+      console.warn(err.message);
+      switch (err.name) {
+        case 'NotFoundError':
+          break;
+        case 'ExpiredError':
+          break;
+      }
     });
+
+    // token = this.state.name;
+    // let url = 'http://192.168.1.7:8000/api/products?token='+token+'';
+    // console.log('url1 '+ token);
+    // console.log('token1 '+ this.state.auth_token);
   }
 
   render () {
     return (
       <View style={Loginstyles.container}>
         <View>
-          <Text style={Loginstyles.headerText}>Үндсэн цэс</Text>
+          <Text style={Loginstyles.headerText}>{this.state.name}</Text>
         </View>
 
         <View style={Loginstyles.inputContainer1}>

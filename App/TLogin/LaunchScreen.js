@@ -6,6 +6,7 @@ import {
     View, 
     Button, 
     StyleSheet,
+    TouchableOpacity
   } from 'react-native'
 import Login from './LoginScreen/LoginForm'
 import Register from './LoginScreen/Register'
@@ -48,10 +49,17 @@ class LaunchScreen extends Component {
             <Image source={Images.launch} style={styles.logo} />
           </View>
 
-          <View style={styles.buttonGroup} >
-            <Button title="Нэвтрэх" onPress={ () => this.props.navigation.navigate('Dashboard') } />
+          {/* <View style={styles.buttonGroup} >
+            <Button title="Нэвтрэх" color="#841584" onPress={ () => this.props.navigation.navigate('Dashboard') } />
             <Button title="Бүртгүүлэх" onPress={ () => this.props.navigation.navigate('Register') } />
-          </View>
+          </View> */}
+
+          <TouchableOpacity style={styles.button} onPress={ () => this.props.navigation.navigate('Login') }>
+            <Text style={styles.buttonText} > Нэвтрэх </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={ () => this.props.navigation.navigate('Register') } style={styles.button}>
+            <Text style={styles.buttonText}> Бүртгүүлэх </Text>
+          </TouchableOpacity>
           
         </ScrollView>
       </View>
@@ -93,82 +101,4 @@ export default createStackNavigator(
     },
   }
 );
-
-const Loginstyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#DCDCDC',
-  },
-  inputContainer: {
-      borderBottomColor: '#F5FCFF',
-      backgroundColor: '#FFFFFF',
-      borderRadius:30,
-      borderBottomWidth: 1,
-      width:250,
-      height:45,
-      marginBottom:20,
-      flexDirection: 'row',
-      alignItems:'center'
-  },
-  inputContainer1: {
-    width:250,
-    height:45,
-    marginBottom:15,
-    flexDirection: 'row',
-    alignItems:'center',
-},
-  inputs:{
-      height:45,
-      marginLeft:16,
-      borderBottomColor: '#FFFFFF',
-      flex:1,
-  },
-  inputIcon:{
-    width:40,
-    height:40,
-    marginLeft:15,
-    justifyContent: 'center',
-  },
-  fingerIcon:{
-    width:40,
-    height:40,
-    marginLeft:10,
-    justifyContent: 'center',
-    // backgroundColor: 'black',
-    borderRadius: 30,
-  },
-  buttonContainer: {
-    height:45,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom:20,
-    width:250,
-    borderRadius:30,
-  },
-  facebook: {
-    height:45,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom:20,
-    width:200,
-    borderRadius:30,
-  },
-  fingerPrint: {
-    height:45,
-    marginBottom:20,
-    width:50,
-    borderRadius:30,
-    justifyContent: 'center',
-  },
-  loginButton: {
-    backgroundColor: "#00b5ec",
-  },
-  loginText: {
-    color: 'white',
-  }
-});
 
