@@ -32,6 +32,7 @@ class FaCheck extends Component{
     this.state = {
       name: '',
       email: '',
+      definition: '',
       timestamp: '',
       auth_token: '',
       products: []
@@ -50,6 +51,7 @@ class FaCheck extends Component{
       this.setState({
         name: ret.name,
         email: ret.email,
+        definition: ret.definition,
         timestamp: ret.timestamp,
         auth_token: ret.auth_token
       });
@@ -94,7 +96,10 @@ class FaCheck extends Component{
           }) }
         style={{flex:1/3,aspectRatio:1}}>
         <Text style={styles.ItemText}>{item.name}</Text>
-        <Image style={{flex: 1}} resizeMode='cover' source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}} ></Image>
+        <Image 
+            style={{width: '100%', height: '100%'}}
+            source={{ uri: 'http://124.158.124.60:8080/toilet/'+item.definition+'' }} />
+        {/* <Image style={{flex: 1}} resizeMode='cover' source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}} ></Image> */}
       </TouchableOpacity>
     );
   }

@@ -49,6 +49,7 @@ class LoginForm extends Component {
             name: response.data.data.name,
             id: response.data.data.id,
             email: response.data.data.email,
+            definition: response.data.data.definition,
             auth_token: response.data.data.auth_token,
             timestamp: new Date().toString()
           };

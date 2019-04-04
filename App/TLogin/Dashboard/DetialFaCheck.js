@@ -28,11 +28,13 @@ class DetialFaCheck extends Component{
         <Text style={styles.rowText}>
           <Text>Нэр: {itemId}</Text>
           <Text>Үнэ: {JSON.stringify(otherParam)}</Text>
-          <Text>{JSON.stringify(definition)}</Text>
-        </Text>
+          </Text>
         <View>
+          <Image 
+            style={{width: '50%', height: '50%'}}
+            source={{ uri: 'http://124.158.124.60:8080/toilet/'+definition+'' }} />
           {/* <Image style={{flex: 1}} resizeMode='cover' source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}} /> */}
-          <Image style={styles.inputIcon} source={{uri: 'https://thumbs.dreamstime.com/z/wooden-toilet-shed-old-wooden-toilet-shed-out-order-sign-door-109618025.jpg'}}/>
+          {/* <Image style={styles.inputIcon} source={{uri: 'https://thumbs.dreamstime.com/z/wooden-toilet-shed-old-wooden-toilet-shed-out-order-sign-door-109618025.jpg'}}/> */}
         </View>
       </View>
     );
@@ -53,8 +55,9 @@ const styles = StyleSheet.create({
     color:'#ff9900'
   },
   inputIcon:{
-    width:'100%',
-    height:'80%',
+    flex: 1,
+    width:10,
+    height:10,
     // marginLeft:15,
   },
 });
