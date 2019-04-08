@@ -29,12 +29,12 @@ class Register extends Component {
     onClickListener = (viewId) => {
   
       var form = new FormData();
-          form.append("name", this.state.name);
+          form.append("user_name", this.state.name);
           form.append("email", this.state.email);
           form.append("password", this.state.password);
           form.append("password_confirmation", this.state.password_confirmation);
   
-      axios.post('http://192.168.88.87:8000/api/user/register',form)
+      axios.post('http://124.158.124.60:8080/toilet/api/user/register',form)
           .then(function(response){
               console.log(response.data);
               var respEmail = response.data.data.email;

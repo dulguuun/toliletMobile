@@ -25,7 +25,7 @@ const storage = new Storage({
   }
 });
 
-class FaCheck extends Component{
+class Negotation extends Component{
 
   constructor(props){
     super(props);
@@ -113,13 +113,14 @@ class FaCheck extends Component{
             onChangeText={this.updateSearch}
             value={this.state.search}
           />
+          <Text>Хэлцэл хийх талбар</Text>
         </View>
-        <FlatList
+        {/* <FlatList
           numColumns={3}
           data={this.state.products}
           renderItem={({item}) =>this.renderItem(item)}
           // keyExtractor={(item, index) => index}
-        />
+        /> */}
       </View>
     );
   }
@@ -149,4 +150,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default FaCheck
+export default Negotation

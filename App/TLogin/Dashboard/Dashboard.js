@@ -79,7 +79,7 @@ class Dashboard extends Component {
           </TouchableHighlight>
 
           <TouchableHighlight style={[Loginstyles.facebook, Loginstyles.loginButton]} 
-            onPress={() => this.props.navigation.navigate('FaCheck')}>
+            onPress={() => this.props.navigation.navigate('Negotation')}>
             {/* <Image style={Loginstyles.fingerIcon} source={Images.fingerPrint}/> */}
             <Text style={Loginstyles.loginText}>Хэлцэл</Text>
           </TouchableHighlight>

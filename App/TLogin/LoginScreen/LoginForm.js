@@ -37,12 +37,14 @@ class LoginForm extends Component {
     }
   }
 
+  componentWillMount = () => {}
+
   _onLoginFunction = () => {
 	var form = new FormData();
     form.append("email", this.state.email);
     form.append("password", this.state.password);
 
-    axios.post('http://192.168.88.87:8000/api/user/login',form)
+    axios.post('http://124.158.124.60:8080/toilet/api/user/login',form)
       .then(response => {
         if(response.data.success){
           let userData = {

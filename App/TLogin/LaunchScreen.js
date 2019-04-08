@@ -13,6 +13,7 @@ import Register from './LoginScreen/Register'
 import Dashboard from './Dashboard/Dashboard'
 import FaCheck from './Dashboard/FaCheck'
 import DetialFaCheck from './Dashboard/DetialFaCheck'
+import Negotation from './Dashboard/Negotation'
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { Images } from '../Themes'
 
@@ -92,6 +93,14 @@ export default createStackNavigator(
     },
     DetialFaCheck: {
       screen: DetialFaCheck,
+    },
+    Negotation: {
+      screen: Negotation,
+      navigationOptions: {
+        title: 'Customer Name, profiles edit, logout',
+        headerLeft: null,
+        gesturesEnabled: false,
+      },
     },
     Login: {
       screen: Login
