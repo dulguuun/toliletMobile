@@ -11,7 +11,8 @@ import {
   StyleSheet,
   Alert,
   AsyncStorage,
-  FlatList
+  FlatList,
+  ListView
 } from 'react-native'
 import axios from 'axios'
 import { SearchBar } from 'react-native-elements'
@@ -59,7 +60,7 @@ class Negotation extends Component{
       console.log('token2 '+ this.state.auth_token);
       let token = this.state.auth_token
       //let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTAuNS4yMDEuMjQ6ODAwMC9hcGkvdXNlci9sb2dpbiIsImlhdCI6MTU1NDE2Mjc4MywiZXhwIjoxNTU0MTY2MzgzLCJuYmYiOjE1NTQxNjI3ODMsImp0aSI6InowOFZQTnY4NnpmdjN4S1ciLCJzdWIiOjEsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.SbmDKTUzYFBL3Ap2xV3Iiwkh2NKqnNAlgbVp4zS1xWk'
-      axios.get('http://124.158.124.60:8080/toilet/api/products?token='+token+'')
+      axios.get('http://124.158.124.60:8080/toilet/api/negotations?token='+token+'')
       .then(response => {
         console.log(response);
         let resJson = JSON.parse(JSON.stringify(response.data));
@@ -88,18 +89,15 @@ class Negotation extends Component{
   renderItem(item) {
     return(
       <TouchableOpacity
-          onPress={ 
-            () => this.props.navigation.navigate('DetialFaCheck',{
-              name: item.name,
-              price: item.price,
-              definition: item.definition
-          }) }
-        style={{flex:1/3,aspectRatio:1}}>
-        <Text style={styles.ItemText}>{item.name}</Text>
-        <Image 
-            style={{width: '100%', height: '100%'}}
-            source={{ uri: 'http://124.158.124.60:8080/toilet/'+item.definition+'' }} />
-        {/* <Image style={{flex: 1}} resizeMode='cover' source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}} ></Image> */}
+        onPress={ 
+        () => this.props.navigation.navigate('DetialFaCheck') }
+        >
+        <View>
+            <Text style={styles.ItemText}>{item.register}</Text>
+            <Image 
+                style={styles.photo}
+                source={{ uri: 'https://cdn.dribbble.com/users/1162077/screenshots/5940704/mushoom-boy-dribbble.png' }} />
+        </View>
       </TouchableOpacity>
     );
   }
@@ -113,14 +111,14 @@ class Negotation extends Component{
             onChangeText={this.updateSearch}
             value={this.state.search}
           />
-          <Text>Хэлцэл хийх талбар</Text>
         </View>
-        {/* <FlatList
-          numColumns={3}
+
+        <FlatList
+          rowNums={1}
           data={this.state.products}
           renderItem={({item}) =>this.renderItem(item)}
-          // keyExtractor={(item, index) => index}
-        /> */}
+          keyExtractor={(item) => item.id.toString()}
+        />
       </View>
     );
   }
@@ -147,7 +145,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     color: 'black',
     fontSize:20,
-  }
+  },
+  separator: {
+    flex: 1,
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: '#8E8E8E',
+  },
+  photo: {
+    height: 50,
+    width: 50,
+    borderRadius: 20,
+  },
 });
 
 export default Negotation

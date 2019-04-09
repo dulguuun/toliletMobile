@@ -37,7 +37,7 @@ class LoginForm extends Component {
     }
   }
 
-  componentWillMount = () => {}
+  // componentWillMount = () => {}
 
   _onLoginFunction = () => {
 	var form = new FormData();
@@ -46,12 +46,14 @@ class LoginForm extends Component {
 
     axios.post('http://124.158.124.60:8080/toilet/api/user/login',form)
       .then(response => {
+        console.log('Response ' + JSON.stringify(response.data))
+        console.log('Response ' + response.data)
         if(response.data.success){
           let userData = {
             name: response.data.data.name,
             id: response.data.data.id,
             email: response.data.data.email,
-            definition: response.data.data.definition,
+            // definition: response.data.data.definition,
             auth_token: response.data.data.auth_token,
             timestamp: new Date().toString()
           };

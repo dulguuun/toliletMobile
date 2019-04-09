@@ -49,7 +49,7 @@ class FaCheck extends Component{
       }
     }).then(ret => {
       this.setState({
-        user_name: ret.user_name,
+        user_name: ret.name,
         email: ret.email,
         definition: ret.definition,
         timestamp: ret.timestamp,

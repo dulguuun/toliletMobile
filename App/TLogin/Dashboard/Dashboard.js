@@ -43,7 +43,7 @@ class Dashboard extends Component {
       this.setState({
         name: ret.name,
         email: ret.email,
-        definition: ret.definition,
+        // definition: ret.definition,
         timestamp: ret.timestamp,
         auth_token: ret.auth_token
       });
