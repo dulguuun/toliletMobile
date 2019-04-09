@@ -89,8 +89,8 @@ class Negotation extends Component{
   renderItem(item) {
     return(
       <TouchableOpacity
-        onPress={ 
-        () => this.props.navigation.navigate('DetialFaCheck') }
+          onPress={ 
+          () => this.props.navigation.navigate('DetialFaCheck') }
         >
         <View>
             <Text style={styles.ItemText}>{item.register}</Text>
