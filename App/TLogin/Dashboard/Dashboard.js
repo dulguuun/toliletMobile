@@ -87,7 +87,7 @@ class Dashboard extends Component {
 
         <View style={Loginstyles.inputContainer1}>
           <TouchableHighlight style={[Loginstyles.facebook, Loginstyles.loginButton]} 
-            onPress={() => this.props.navigation.navigate('FaCheck')}>
+            onPress={() => this.props.navigation.navigate('MonitorMaps')}>
             <Text style={Loginstyles.loginText}>Хяналтын самбар</Text>
           </TouchableHighlight>
 

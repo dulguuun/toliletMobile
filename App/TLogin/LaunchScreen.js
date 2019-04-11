@@ -14,6 +14,7 @@ import Dashboard from './Dashboard/Dashboard'
 import FaCheck from './Dashboard/FaCheck'
 import DetialFaCheck from './Dashboard/DetialFaCheck'
 import Negotation from './Dashboard/Negotation'
+import MonitorMaps from './Dashboard/MonitorMaps'
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { Images } from '../Themes'
 
@@ -55,7 +56,7 @@ class LaunchScreen extends Component {
             <Button title="Бүртгүүлэх" onPress={ () => this.props.navigation.navigate('Register') } />
           </View> */}
 
-          <TouchableOpacity style={styles.button} onPress={ () => this.props.navigation.navigate('Login') }>
+          <TouchableOpacity style={styles.button} onPress={ () => this.props.navigation.navigate('Dashboard') }>
             <Text style={styles.buttonText} > Нэвтрэх </Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={ () => this.props.navigation.navigate('Register') } style={styles.button}>
@@ -99,6 +100,13 @@ export default createStackNavigator(
       navigationOptions: {
         title: 'Customer Name, profiles edit, logout',
         headerLeft: null,
+        gesturesEnabled: false,
+      },
+    },
+    MonitorMaps: {
+      screen: MonitorMaps,
+      navigationOptions: {
+        title: 'Gogole maps',
         gesturesEnabled: false,
       },
     },
