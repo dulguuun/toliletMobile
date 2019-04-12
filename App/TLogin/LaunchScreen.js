@@ -75,7 +75,7 @@ class LaunchScreen extends Component {
 
     PushNotification.localNotificationSchedule({
       //... You can use all the options from localNotifications
-      message: "Fucking nofitication",
+      message: "This is nofitication",
       date: new Date(Date.now() + (5 * 1000))
     });
   }
